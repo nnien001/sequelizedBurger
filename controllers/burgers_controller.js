@@ -1,35 +1,40 @@
 console.log("using burgers_controller.js");
 
-var express = require("express");
-var burger = require("../models/burger.js");
+var db = require("../models");
 
-var router = express.Router();
+// Routes
+// =============================================================
+module.exports = function(app) {
 
-router.get("/", function(req, res){
-	burger.selectAll(function(data) {
-		var hbsObject = {
-			burger: data
+  // GET route for getting all of the posts
+  app.get("/", function(req, res) {
+    db.sequelizedBurgers.findAll({}).then(function(dbBurgers) {
+    	var hbsObject = {
+			burger: dbBurgers
 		};
-		console.log(hbsObject);
+      	console.log(hbsObject);
     	res.render("index", hbsObject);
-	});
-});
+    });
+  });
 
-router.post("/", function(req, res){
-	burger.insertOne(req.body.newBurgerName, function() {
-		console.log(req.body.newBurgerName);
-		res.redirect("/");
-	});
-});
+  app.post("/", function(req, res) {
+  	db.sequelizedBurgers.create({
+		burgerName: req.body.newBurgerName,
+		devoured: false
+	}).then(function(dbBurgers) {
+      	res.redirect("/");
+ 	});
+  });
 
-router.put("/:id", function(req, res){
-
-	burger.updateOne(req.body.burgerID, function() {
-		console.log(req.body.burgerID);
-		res.redirect("/");
-	});
-
-});
-
-
-module.exports = router;
+  app.put("/:id", function(req, res) {
+    db.sequelizedBurgers.update({
+    	devoured: true
+    	}, {
+    	where: {
+        	id: req.body.burgerID
+        }
+        }).then(function(dbBurgers) {
+        res.redirect("/");
+      });
+  });
+};

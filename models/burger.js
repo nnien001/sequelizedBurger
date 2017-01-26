@@ -1,26 +1,19 @@
-console.log("using burger.js");
-var orm = require("../config/orm.js");
+module.exports = function(sequelize, DataTypes) {
+  var Burgers = sequelize.define("sequelizedBurgers", {
+    burgerName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    devoured: {
+      type:DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
+  });
 
-var burger= {
+  return Burgers;
+};
 
-	selectAll: function(cb) {
-		orm.selectAll("burgers", function(res) {
-			cb(res);
-		});
-	},
-  
-  	insertOne: function(newBurgerName, cb) {
-    	orm.insertOne("burgers", "burger_name", newBurgerName, function(res) {
-      		cb(res);
-    	});
-  	},
-
-  	updateOne: function(burgerID, cb) {
-  		orm.updateOne("burgers", "devoured", true, "id", burgerID, function(res) {
-  			cb(res);
-  		});
-  	}
-
-}
-
-module.exports = burger;
