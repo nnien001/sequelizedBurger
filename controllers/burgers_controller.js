@@ -36,5 +36,6 @@ module.exports = function(app) {
     }).then(function(dbBurgers) {
         res.redirect("/");
     });
+    */
   });
-*/};
+};
