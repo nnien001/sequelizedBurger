@@ -8,26 +8,26 @@ module.exports = function(app) {
 
   // GET route for getting all of the posts
   app.get("/", function(req, res) {
-    db.sequelizedBurgers.findAll({}).then(function(dbBurgers) {
+/*    db.sequelizedBurgers.findAll({}).then(function(dbBurgers) {
     	var hbsObject = {
 			burger: dbBurgers
 		};
       	console.log(hbsObject);
     	res.render("index", hbsObject);
     });
-  });
+*/  });
 
   app.post("/", function(req, res) {
-  	db.sequelizedBurgers.create({
+/*  	db.sequelizedBurgers.create({
 		  burgerName: req.body.newBurgerName,
 		  devoured: false
 	  }).then(function(dbBurgers) {
       	res.redirect("/");
  	  });
-  });
+*/  });
 
   app.put("/:id", function(req, res) {
-    db.sequelizedBurgers.update({
+/*    db.sequelizedBurgers.update({
     	devoured: true
     }, {
     	where: {
@@ -37,4 +37,4 @@ module.exports = function(app) {
         res.redirect("/");
     });
   });
-};
+*/};
