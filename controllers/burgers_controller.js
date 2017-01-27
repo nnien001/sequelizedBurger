@@ -13,7 +13,8 @@ module.exports = function(app) {
 			burger: dbBurgers
 		};
       	console.log(hbsObject);
-    	res.render("index", hbsObject);
+    	//res.render("index", hbsObject);
+      res.redirect("/");
     });
   });
 
