@@ -39,7 +39,7 @@ app.set("view engine", "handlebars");
 
 // Routes =============================================================
 
-require("./controllers/burgers_controller.js")(app);
+var burger = require("./controllers/burgers_controller.js")(app);
 
 //require("./routes/html-routes.js")(app);
 //require("./routes/post-api-routes.js")(app);

@@ -13,29 +13,28 @@ module.exports = function(app) {
 			burger: dbBurgers
 		};
       	console.log(hbsObject);
-    	//res.render("index", hbsObject);
-      res.redirect("/");
+    	res.render("index", hbsObject);
     });
   });
 
   app.post("/", function(req, res) {
   	db.sequelizedBurgers.create({
-		burgerName: req.body.newBurgerName,
-		devoured: false
-	}).then(function(dbBurgers) {
+		  burgerName: req.body.newBurgerName,
+		  devoured: false
+	  }).then(function(dbBurgers) {
       	res.redirect("/");
- 	});
+ 	  });
   });
 
   app.put("/:id", function(req, res) {
     db.sequelizedBurgers.update({
     	devoured: true
-    	}, {
+    }, {
     	where: {
-        	id: req.body.burgerID
-        }
-        }).then(function(dbBurgers) {
+        id: req.body.burgerID
+      }
+    }).then(function(dbBurgers) {
         res.redirect("/");
-      });
+    });
   });
 };
