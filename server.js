@@ -33,16 +33,12 @@ app.use(methodOverride("_method"));
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
-
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Routes =============================================================
-
 require("./controllers/burgers_controller.js")(app);
 
-// Static directory
-app.use(express.static("./public"));
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({ force: true }).then(function() {
